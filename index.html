@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Flywire Invoicing SSO</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.min.js"></script>
+  </head>
+  <body>
+    <h1>SSO test page</h1>
+
+    <p>
+      Enter the required data below to generate the Flywire Invoicing SSO URL
+      (default reference and key from Cori Biller Company 03 in .cc)
+    </p>
+    <div style="display: grid;width: 300px;">
+      <span>API endpoint</span>
+      <input
+        type="text"
+        name="endpoint"
+        id="endpoint"
+        value="https://app.flywire.cc/rest/authentication/sso/simple"
+      />
+      <span style="margin-top: 10px;">Company reference</span>
+      <input type="text" name="reference" id="reference" value="24GGDI" />
+      <span style="margin-top: 10px;">Public key</span>
+      <textarea
+        type="text"
+        name="public_key"
+        id="public_key"
+        rows="6"
+        value=""
+      ></textarea>
+      <span style="margin-top: 10px;">Payer email</span>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        value="test.payer@flywire.com"
+      />
+      <span style="margin-top: 10px;">Payer first name</span>
+      <input type="text" name="fname" id="fname" value="Test" />
+      <span style="margin-top: 10px;">Payer last name</span>
+      <input type="text" name="lname" id="lname" value="Payer" />
+      <span style="margin-top: 10px;">2 letter country code</span>
+      <input type="text" name="country" id="country" value="RO" />
+
+      <button style="margin-top:20px; width:150px;" onclick="generate()">
+        Generate URL
+      </button>
+      
+      <button style="margin-top:20px; width:150px;" onclick="access()">
+        Access URL
+      </button>
+
+      <span style="color:red;margin-top:20px;" id="error"></span>
+
+      <span
+        id="url"
+        value=""
+        style="width: 500px;word-break: break-word;"
+      ></span>
+    </div>
+  </body>
+</html>
